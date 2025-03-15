@@ -105,6 +105,7 @@ def write_txt(file_path, data, encoding='utf-8'):
     :param file_path: The file path to the TXT data.
     :param data: The data to be written as TXT.
     :param encoding: The encoding of the TXT data. Defaults to 'utf-8'.
+    :return None
     """
     with open(file_path, 'w', encoding=encoding) as file:
         file.write(data)
@@ -115,6 +116,7 @@ def append_txt(file_path, data, encoding='utf-8'):
     :param file_path: The file path to the TXT data.
     :param data: The data to be appended as TXT.
     :param encoding: The encoding of the TXT data. Defaults to 'utf-8'.
+    :return None
     """
     with open(file_path, 'a', encoding=encoding) as file:
         file.write(data)
