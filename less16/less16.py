@@ -42,5 +42,5 @@ handler = TxtFileHandler()
 # content = handler.read_file('txt')
 # print(content)
 
-handler.write_file('txt', '')
+handler.write_file('txt', 'https://github.com/vzorvalpodrugu/Homeworks')
 # handler.append_file('txt', 'This is the third line.\n')
