@@ -26,13 +26,16 @@ class ImageCompressor:
             int: Качество сжатия
         """
         return self.__quality
+
     @quality.setter
     def quality(self, __quality: int) -> None:
         """
-        self.quality = quality
-        print(f"Изменено качество сжатия: {self.quality}")
+        Устанавливает новое качество сжатия изображения.
+
+        :return None
         """
         self.__quality = __quality
+
     @staticmethod
     def compress_image(input_path:str, output_path: str) -> None:
         """
