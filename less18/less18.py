@@ -16,7 +16,8 @@ class ImageCompressor:
 
         :param __quality: Качество сжатия изображения (по умолчанию 50)
         """
-        self.quality = __quality
+        self.__quality = __quality
+    @property
     def quality(self) -> int:
         """
         Возвращает текущее качество сжатия изображения.
@@ -24,9 +25,16 @@ class ImageCompressor:
         Returns:
             int: Качество сжатия
         """
-        return self.quality
-
-    def compress_image(self, input_path:str, output_path: str) -> None:
+        return self.__quality
+    @quality.setter
+    def quality(self, __quality: int) -> None:
+        """
+        self.quality = quality
+        print(f"Изменено качество сжатия: {self.quality}")
+        """
+        self.__quality = __quality
+    @staticmethod
+    def compress_image(input_path:str, output_path: str) -> None:
         """
         Сжимает изображение и сохраняет его в формате HEIF.
 
@@ -51,6 +59,7 @@ class ImageCompressor:
         Returns:
             None
         """
+        print("Directory")
         for root, _, files in os.walk(directory):
             for file in files:
                 # Проверяем расширение файла
