@@ -92,7 +92,7 @@ class TxtFile(AbstractFile):
         with open(self.filepath, 'a') as file:
             file.write(data)
 
-class CvsFile(AbstractFile):
+class CsvFile(AbstractFile):
     """
     Class for CSV files.
     """
