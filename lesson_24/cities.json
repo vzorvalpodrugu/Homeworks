@@ -1,0 +1,83 @@
+[
+    {
+        "name": "Москва",
+        "population": 12678079,
+        "subject": "Москва",
+        "district": "Центральный",
+        "latitude": 55.7558,
+        "longitude": 37.6173
+    },
+    {
+        "name": "Санкт-Петербург",
+        "population": 5398064,
+        "subject": "Санкт-Петербург",
+        "district": "Северо-Западный",
+        "latitude": 59.9343,
+        "longitude": 30.3351
+    },
+   {
+        "name": "Новосибирск",
+        "population": 1620162,
+        "subject": "Новосибирская область",
+        "district": "Сибирский",
+        "latitude": 55.0084,
+        "longitude": 82.9357
+    },
+    {
+        "name": "Екатеринбург",
+        "population": 1493749,
+        "subject": "Свердловская область",
+        "district": "Уральский",
+        "latitude": 56.8519,
+        "longitude": 60.6122
+    },
+    {
+        "name": "Казань",
+        "population": 1257391,
+        "subject": "Республика Татарстан",
+        "district": "Приволжский",
+        "latitude": 55.7887,
+        "longitude": 49.1221
+    },
+    {
+        "name": "Нижний Новгород",
+        "population": 1244254,
+        "subject": "Нижегородская область",
+        "district": "Приволжский",
+        "latitude": 56.2965,
+        "longitude": 43.9361
+    },
+    {
+        "name": "Челябинск",
+        "population": 1196680,
+        "subject": "Челябинская область",
+        "district": "Уральский",
+        "latitude": 55.1644,
+        "longitude": 61.4368
+    },
+    {
+        "name": "Самара",
+        "population": 1156659,
+        "subject": "Самарская область",
+        "district": "Приволжский",
+        "latitude": 53.1959,
+        "longitude": 50.1001
+    },
+    {
+        "name": "Омск",
+        "population": 1154000,
+        "subject": "Омская область",
+        "district": "Сибирский",
+        "latitude": 54.9924,
+        "longitude": 73.3686
+    },
+    {
+        "name": "Ростов-на-Дону",
+        "population": 1137704,
+        "subject": "Ростовская область",
+        "district": "Южный",
+        "latitude": 47.2357,
+        "longitude": 39.7015
+    }
+]
+
