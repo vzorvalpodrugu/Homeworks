@@ -82,6 +82,7 @@ class CityGame:
 
     def start_game(self):
         self.is_over = False
+        self.cities.load_cities()
 
     def human_turn(self):
         city_input = input()
@@ -117,5 +118,21 @@ class CityGame:
             print('Кампукта победил')
         pass
 
+class GameManager:
+    def __init__(self):
+        self.game = CityGame(CitiesSerializer(JsonFile('json_file')))
+
+    def run_game(self):
+        return self.game.check_game_over()
+
+    def __call__(self):
+        self.game.start_game()
+        while not self.game.is_over:
+            self.game.human_turn()
+            self.game.computer_turn()
+            self.run_game()
+
+if __name__ == "__main__":
+    GameManager()
 
 
