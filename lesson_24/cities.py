@@ -1,4 +1,5 @@
 import json
+import random
 from dataclasses import dataclass, field
 class JsonFile:
     """
@@ -68,7 +69,53 @@ class CitiesSerializer:
 # file = JsonFile('cities.json')
 # Serial = CitiesSerializer(file)
 # Serial.load_cities()
-# print(Serial.cities)
+# print(Serial.cities[1].name)
 
 # print(file.read_data())
+
+class CityGame:
+    def __init__(self, cities: CitiesSerializer):
+        self.cities = cities
+        self.is_over = True
+        self.human_city = ''
+        self.computer_word = ''
+
+    def start_game(self):
+        self.is_over = False
+
+    def human_turn(self):
+        city_input = input()
+        if city_input in self.cities.cities and self.computer_word[len(self.computer_word) - 1 ] == city_input[0]:
+            self.cities.cities.is_used = True
+            self.human_city = city_input
+            print('Человечишка назвал город: ' + city_input)
+        else:
+            self.human_turn()
+
+    def computer_turn(self):
+        is_first = True
+        rnd = random.randint(0, len(self.cities.cities) - 1)
+        if is_first:
+            computer_word = self.cities.cities[rnd].name
+            is_first = False
+            self.cities.cities[rnd].is_used = True
+            print("Кампукта назвал город:" + computer_word)
+        else:
+            for city in self.cities.cities:
+                if city[0] == self.human_city[len(self.human_city) - 1]:
+                    computer_word = city
+                    city.is_used = True
+                    print("Кампукта назвал город:" + computer_word)
+        pass
+
+    def check_game_over(self):
+        if self.human_city == self.computer_word:
+            self.is_over = True
+            print('Человечишка победил')
+        elif self.computer_word == self.human_city:
+            self.is_over = True
+            print('Кампукта победил')
+        pass
+
+
 
