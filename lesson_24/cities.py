@@ -65,6 +65,9 @@ class CitiesSerializer:
                 longitude=city_data['longitude']
             )
             self.cities.append(city)
+        print("Города инициализированы")
+
+
 
 # file = JsonFile('cities.json')
 # Serial = CitiesSerializer(file)
@@ -74,65 +77,106 @@ class CitiesSerializer:
 # print(file.read_data())
 
 class CityGame:
+    """
+    Класс для управления игрой в города
+    """
     def __init__(self, cities: CitiesSerializer):
+        """
+        Инициализирует игру с заданными городами.
+        Args:
+            cities:
+        """
         self.cities = cities
         self.is_over = True
-        self.human_city = ''
-        self.computer_word = ''
+        self.human_city: str = ''
+        self.computer_word: str = ''
+        self.is_first_turn = True
 
     def start_game(self):
+        """
+        Начинает игру.
+        Returns:
+
+        """
         self.is_over = False
         self.cities.load_cities()
+        print("Игра началась!")
+        self.computer_turn()
 
     def human_turn(self):
-        city_input = input()
-        if city_input in self.cities.cities and self.computer_word[len(self.computer_word) - 1 ] == city_input[0]:
-            self.cities.cities.is_used = True
-            self.human_city = city_input
-            print('Человечишка назвал город: ' + city_input)
+        """
+        Выполняет ход игрока.
+        Returns:
+
+        """
+        print("Компьютер назвал город: " + self.computer_word + ".\nТеперь ваша очередь)")
+        self.human_city = input()
+        if (any(city.name.lower() == self.human_city.lower() for city in self.cities.cities)) and self.computer_word[len(self.computer_word) - 1 ].lower() == self.human_city[0].lower():
+            print('Человечишка назвал город: ' + self.human_city)
+        elif any(city.name.lower() == self.human_city.lower() for city in self.cities.cities):
+            print("Город есть в списке, но не подходит\nВы проиграли!")
+        elif self.human_city[0].lower() == self.computer_word[len(self.computer_word)-1].lower():
+            print("Буквы совпали, но города нет в списке\nВы проиграли!")
+            self.is_over = True
         else:
-            self.human_turn()
+            print("Вы проиграли!")
+            self.is_over = True
+
+        # print(self.computer_word, self.human_city)
 
     def computer_turn(self):
-        is_first = True
-        rnd = random.randint(0, len(self.cities.cities) - 1)
-        if is_first:
-            computer_word = self.cities.cities[rnd].name
-            is_first = False
-            self.cities.cities[rnd].is_used = True
-            print("Кампукта назвал город:" + computer_word)
-        else:
-            for city in self.cities.cities:
-                if city[0] == self.human_city[len(self.human_city) - 1]:
-                    computer_word = city
-                    city.is_used = True
-                    print("Кампукта назвал город:" + computer_word)
-        pass
+        """
+        Выполняет ход компьютера.
+        Returns:
 
-    def check_game_over(self):
-        if self.human_city == self.computer_word:
-            self.is_over = True
-            print('Человечишка победил')
-        elif self.computer_word == self.human_city:
-            self.is_over = True
-            print('Кампукта победил')
-        pass
+        """
+        if self.is_first_turn:
+            rnd = random.randint(0, len(self.cities.cities) - 1)
+            self.computer_word = self.cities.cities[rnd].name
+            self.cities.cities[rnd].is_used = True
+            print("Кампукта назвал город:" + self.computer_word)
+            self.is_first_turn = False
+        else:
+            print("Человек назвал город: " + self.human_city + ".\nТеперь очередь компьютера! \n")
+            for city in self.cities.cities:
+                if city.name[0].lower() == self.human_city[len(self.human_city) - 1].lower():
+                    self.computer_word = city.name
+                    # self.cities.cities.city.is_used = True
+                    # print(self.cities.cities)
+                    city.is_used = True
+                    print("Кампукта назвал город: " + self.computer_word)
+                    break
+            else:
+                print("Компьютер проиграл!")
+                self.is_over = True
+        # print(self.computer_word, self.human_city)
+
+
 
 class GameManager:
+    """
+    Класс для управления игрой
+    """
     def __init__(self):
-        self.game = CityGame(CitiesSerializer(JsonFile('json_file')))
+        self.game = CityGame(CitiesSerializer(JsonFile('cities.json')))
 
-    def run_game(self):
-        return self.game.check_game_over()
+    # def run_game(self):
+    #     return self.game.check_game_over()
 
     def __call__(self):
         self.game.start_game()
         while not self.game.is_over:
             self.game.human_turn()
+            # self.run_game()
+            if self.game.is_over:
+                break
             self.game.computer_turn()
-            self.run_game()
+
 
 if __name__ == "__main__":
-    GameManager()
+    game = GameManager()
+    game()
+
+
 
 
