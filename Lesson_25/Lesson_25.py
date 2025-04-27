@@ -35,5 +35,9 @@ from marvel import full_dict
 # print(sort_movies)
 
 # пункт 8
-sort_movies = sorted(full_dict.items(), key=lambda item: (item[1]['title'] is not None, item[1]['year'] is int))
-print(sort_movies)
+# sort_movies = sorted(full_dict.items(), key=lambda item: (item[1]['title'] is not None, item[1]['year'] is int))
+# print(sort_movies)
+
+# пункт 9
+filt_sort_movies = sorted(dict(filter(lambda item: item[0]<20,full_dict.items())).items(), key=lambda item: item[1]['year'])
+print(filt_sort_movies)
