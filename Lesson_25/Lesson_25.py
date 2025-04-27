@@ -33,3 +33,7 @@ from marvel import full_dict
 # пункт 7 У вас была ошибка на занятии, потому что в одном из фильмов, название было None
 # sort_movies = sorted(full_dict.items(), key=lambda item: item[1]['title'] is not None)
 # print(sort_movies)
+
+# пункт 8
+sort_movies = sorted(full_dict.items(), key=lambda item: (item[1]['title'] is not None, item[1]['year'] is int))
+print(sort_movies)
