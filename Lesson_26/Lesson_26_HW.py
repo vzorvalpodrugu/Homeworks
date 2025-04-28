@@ -109,3 +109,5 @@ def register_user(username: str, password: str):
     return "User registered"
 
 print(register_user("makaka", "1sS$rsfew"))
+
+# Готово
