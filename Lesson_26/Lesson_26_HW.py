@@ -64,8 +64,39 @@ def password_cheker(min_len: int = 8, spec_symbol: str = special_symbol):
     return decorator
 
 
-@password_cheker(8)
+@password_cheker()
 def register_user(password: str):
     return "User registered"
 
-print(register_user('1sRq@werq'))
+# print(register_user('1sRq@werq'))
+
+def password_validator(min_length: int = 8, min_uppercase: bool = False, min_lowercase:bool = False, min_special_chars:bool = False):
+    def decorator(func):
+        def wrapper(password: str):
+            if len(password) < min_length:
+                raise ValueError('Password is too short')
+            else:
+                # Теперь здесь 1 цикл, ну кроме letter in spec_symbol, и вроде всё четко
+                for letter in password:
+                    if letter.istitle(): min_uppercase = True
+                    if letter.islower(): min_lowercase = True
+                    if letter in special_symbol: min_special_chars = True
+                if min_uppercase and min_lowercase and min_special_chars:
+                    return func(password)
+                else:
+                    raise ValueError('Password is too weak')
+        return wrapper
+    return decorator
+
+def username_validator():
+    def decorator(func):
+        def wrapper(password: str):
+            return func(password)
+        return wrapper
+    return decorator
+
+@password_validator()
+def register_user(password: str):
+    return "User registered"
+
+# print(register_user("1s224S%^"))
