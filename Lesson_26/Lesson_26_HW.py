@@ -1,3 +1,4 @@
+import csv
 special_symbol = '!@#$%^&*()_+"№;%:?-=/";:<>,. '
 passw = 'fdsf32f@$1fs;'
 
@@ -72,7 +73,7 @@ def register_user(password: str):
 
 def password_validator(min_length: int = 8, min_uppercase: bool = False, min_lowercase:bool = False, min_special_chars:bool = False):
     def decorator(func):
-        def wrapper(password: str):
+        def wrapper(username: str, password: str):
             if len(password) < min_length:
                 raise ValueError('Password is too short')
             else:
@@ -82,7 +83,7 @@ def password_validator(min_length: int = 8, min_uppercase: bool = False, min_low
                     if letter.islower(): min_lowercase = True
                     if letter in special_symbol: min_special_chars = True
                 if min_uppercase and min_lowercase and min_special_chars:
-                    return func(password)
+                    return func(username, password)
                 else:
                     raise ValueError('Password is too weak')
         return wrapper
@@ -90,13 +91,21 @@ def password_validator(min_length: int = 8, min_uppercase: bool = False, min_low
 
 def username_validator():
     def decorator(func):
-        def wrapper(password: str):
-            return func(password)
+        def wrapper(username: str, password: str):
+            for letter in username:
+                if letter == " ":
+                    raise ValueError('Username contains space')
+            return func(username, password)
         return wrapper
     return decorator
 
 @password_validator()
-def register_user(password: str):
+@username_validator()
+def register_user(username: str, password: str):
+    with open('file.csv', 'a', newline='') as file:
+        writer = csv.writer(file)
+        writer.writerows(username)
+        writer.writerows(password)
     return "User registered"
 
-# print(register_user("1s224S%^"))
+print(register_user("makaka", "1sS$rsfew"))
