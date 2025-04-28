@@ -108,6 +108,11 @@ def register_user(username: str, password: str):
         writer.writerows(password)
     return "User registered"
 
-print(register_user("makaka", "1sS$rsfew"))
+# print(register_user("makaka", "1sS$rsfew"))
 
-# Готово
+try:
+    register_user("JohnDoe", "Password123!")
+    print("Регистрация прошла успешно!")
+except ValueError as e:
+    print(f"Ошибка: {e}")
+
